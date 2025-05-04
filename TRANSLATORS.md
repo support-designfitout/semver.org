@@ -18,6 +18,10 @@ This file contains the translation contributors who are willing to help translat
 
 - [@ShlomoCode](https://github.com/ShlomoCode)
 
+## Italian
+
+- [@LorenzoAncora](https://github.com/LorenzoAncora)
+
 ## Serbian
 
 - [@rammba](https://github.com/rammba)
