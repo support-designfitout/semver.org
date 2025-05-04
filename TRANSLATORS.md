@@ -25,3 +25,7 @@ This file contains the translation contributors who are willing to help translat
 ## Serbian
 
 - [@rammba](https://github.com/rammba)
+
+## Danish
+
+- [@symegac](https://github.com/symegac)
