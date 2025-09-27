@@ -1,0 +1,11 @@
+# wrangler.toml — semver.org on Cloudflare Pages + Pages Functions
+name = "semver-org"
+compatibility_date = "2025-01-01"
+
+[assets]
+# Static site root
+dir = "public"
+
+# If you want to bind custom vars later, add under [vars] or [env.production.vars]
+# [vars]
+# EXAMPLE_API_BASE = "https://api.example.com"
