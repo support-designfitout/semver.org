@@ -1,0 +1,33 @@
+name = "semver-org"
+compatibility_date = "2024-01-01"
+
+[env.production]
+routes = [
+  { pattern = "semver.org/*", zone_name = "semver.org" }
+]
+
+[env.preview]
+# Preview environment configuration
+
+# Pages configuration
+pages_build_output_dir = "public"
+
+# Environment variables (use Cloudflare dashboard for actual values)
+[vars]
+# Add non-sensitive environment variables here
+ENVIRONMENT = "production"
+
+# For sensitive values, use:
+# wrangler secret put SECRET_NAME
+
+# Build configuration  
+[build]
+command = ""  # No build needed for static files
+cwd = "."
+
+# Compatibility
+compatibility_flags = []
+
+# Functions configuration
+[functions]
+# Cloudflare Pages Functions are automatically detected from /functions directory

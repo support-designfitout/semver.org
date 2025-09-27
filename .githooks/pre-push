@@ -1,0 +1,40 @@
+#!/bin/bash
+# Pre-push hook to prevent Vercel artifacts
+
+set -e
+
+echo "🔍 Final check for Vercel artifacts before push..."
+
+# Get the range of commits being pushed
+if [ -n "$2" ] && [ "$2" != "0000000000000000000000000000000000000000" ]; then
+    # We have a specific range
+    RANGE="$2..$4"
+else
+    # Push to new branch or first push
+    RANGE="HEAD"
+fi
+
+# Check all files in the commits being pushed
+FORBIDDEN_FOUND=false
+
+# Check for forbidden files in the entire repository
+if find . -name ".vercel" -type d -o -name "vercel.json" -type f | grep -v ".git" > /dev/null 2>&1; then
+    echo "❌ BLOCKED: Found Vercel artifacts in repository"
+    FORBIDDEN_FOUND=true
+fi
+
+# Check for Vercel references in tracked files
+if git ls-files | xargs grep -l "vercel.app\|VERCEL_" 2>/dev/null | grep -v ".git" > /dev/null 2>&1; then
+    echo "❌ BLOCKED: Found Vercel references in tracked files"
+    FORBIDDEN_FOUND=true
+fi
+
+if [ "$FORBIDDEN_FOUND" = true ]; then
+    echo ""
+    echo "🚫 PUSH BLOCKED: This repository is Cloudflare Pages ONLY"
+    echo "   Remove all Vercel artifacts and references before pushing."
+    echo "   See SECURITY.md for deployment policy."
+    exit 1
+fi
+
+echo "✅ No Vercel artifacts detected - proceeding with push"
