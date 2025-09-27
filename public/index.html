@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Semantic Versioning 2.0.0 | semver.org</title>
+    <meta
+      name="description"
+      content="Semantic Versioning specification for software version numbering"
+    />
+    <link rel="canonical" href="https://semver.org/" />
+
+    <!-- Basic styling -->
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        line-height: 1.6;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+      }
+      h1 {
+        color: #2c5aa0;
+      }
+      .intro {
+        font-size: 1.1em;
+        margin-bottom: 2em;
+      }
+      .notice {
+        background: #f0f8ff;
+        border-left: 4px solid #2c5aa0;
+        padding: 1em;
+        margin: 2em 0;
+      }
+      a {
+        color: #2c5aa0;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Semantic Versioning 2.0.0</h1>
+    </header>
+
+    <main>
+      <div class="intro">
+        <p>
+          <strong>semver.org</strong> - The official specification for Semantic
+          Versioning.
+        </p>
+      </div>
+
+      <div class="notice">
+        <p>
+          <strong>Note:</strong> This is a Cloudflare Pages deployment of the
+          semver.org specification.
+        </p>
+        <p>
+          The full Jekyll-powered site content is available at the main domain.
+        </p>
+      </div>
+
+      <section>
+        <h2>Summary</h2>
+        <p>
+          Given a version number <code>MAJOR.MINOR.PATCH</code>, increment the:
+        </p>
+        <ol>
+          <li>
+            <strong>MAJOR</strong> version when you make incompatible API
+            changes
+          </li>
+          <li>
+            <strong>MINOR</strong> version when you add functionality in a
+            backward compatible manner
+          </li>
+          <li>
+            <strong>PATCH</strong> version when you make backward compatible bug
+            fixes
+          </li>
+        </ol>
+        <p>
+          Additional labels for pre-release and build metadata are available as
+          extensions to the <code>MAJOR.MINOR.PATCH</code> format.
+        </p>
+      </section>
+
+      <section>
+        <h2>Links</h2>
+        <ul>
+          <li><a href="https://semver.org/">Full Specification</a></li>
+          <li>
+            <a href="https://github.com/semver/semver.org">GitHub Repository</a>
+          </li>
+        </ul>
+      </section>
+    </main>
+
+    <footer
+      style="
+        margin-top: 3em;
+        padding-top: 2em;
+        border-top: 1px solid #eee;
+        font-size: 0.9em;
+        color: #666;
+      "
+    >
+      <p>
+        Deployed on Cloudflare Pages | <a href="/health/pages">Health Check</a>
+      </p>
+    </footer>
+
+    <!-- Basic health check endpoint simulation -->
+    <script>
+      // For demo purposes - in real deployment, health endpoint would be a Pages Function
+      if (window.location.pathname === "/health/pages") {
+        document.body.innerHTML =
+          '<pre>{"ok": true, "timestamp": "' +
+          new Date().toISOString() +
+          '", "service": "semver.org"}</pre>';
+        document.head.innerHTML = "<title>Health Check</title>";
+      }
+    </script>
+  </body>
+</html>

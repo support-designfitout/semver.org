@@ -1,0 +1,98 @@
+name: 🤖 Copilot Task Request
+description: Request a task to be completed by GitHub Copilot
+title: "[Copilot]: "
+labels: ["copilot"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Copilot Task Request
+        Use this template to request tasks that should be completed by GitHub Copilot agents.
+        
+        **Remember:** This repository is Cloudflare Pages only - no Vercel artifacts allowed.
+
+  - type: input
+    id: task-title
+    attributes:
+      label: Task Title
+      description: Brief title describing what needs to be done
+      placeholder: "e.g., Add new language translation, Fix responsive layout"
+    validations:
+      required: true
+
+  - type: textarea
+    id: task-description
+    attributes:
+      label: Task Description
+      description: Detailed description of the task
+      placeholder: |
+        Describe what needs to be implemented, changed, or fixed.
+        Include specific requirements, constraints, and expected outcomes.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      description: How urgent is this task?
+      options:
+        - Low
+        - Medium  
+        - High
+        - Critical
+      default: 1
+    validations:
+      required: true
+
+  - type: dropdown
+    id: task-type
+    attributes:
+      label: Task Type
+      description: What kind of task is this?
+      options:
+        - Feature Addition
+        - Bug Fix
+        - Content Update
+        - Translation
+        - Documentation
+        - Refactoring
+        - Other
+      default: 0
+    validations:
+      required: true
+
+  - type: textarea
+    id: files-to-modify
+    attributes:
+      label: Files to Modify (if known)
+      description: List specific files that should be modified
+      placeholder: |
+        e.g.:
+        - public/index.html
+        - lang/es/index.md
+        - _config.yml
+
+  - type: checkboxes
+    id: requirements
+    attributes:
+      label: Requirements Checklist
+      description: Check all that apply to this task
+      options:
+        - label: This task is compatible with Cloudflare Pages hosting
+        - label: No Vercel dependencies will be introduced
+        - label: Existing functionality should not be broken
+        - label: Tests should be updated if applicable
+        - label: Documentation should be updated if applicable
+
+  - type: textarea
+    id: acceptance-criteria
+    attributes:
+      label: Acceptance Criteria
+      description: How will we know this task is complete?
+      placeholder: |
+        Define specific, measurable criteria for task completion.
+        e.g.:
+        - [ ] New page loads successfully
+        - [ ] All tests pass
+        - [ ] Translation is complete and accurate

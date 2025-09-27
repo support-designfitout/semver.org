@@ -1,0 +1,11 @@
+# Cloudflare Pages redirects file
+# Add 301 redirects here as needed
+# Example:
+# /old-path /new-path 301
+# /v1/* /spec/:splat 301
+
+# Redirect root to main site if needed
+# / https://semver.org 301
+
+# Health check (handled by Pages Function)
+/health/pages /health/pages 200

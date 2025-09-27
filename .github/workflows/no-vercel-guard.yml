@@ -1,0 +1,80 @@
+name: No-Vercel Guard
+
+on:
+  push:
+    branches: [ "main", "gh-pages" ]
+  pull_request:
+    branches: [ "main", "gh-pages" ]
+
+jobs:
+  no-vercel-guard:
+    runs-on: ubuntu-latest
+    name: Prevent Vercel artifacts
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Run No-Vercel verification
+      run: |
+        echo "🔍 Checking for Vercel artifacts..."
+        
+        # Check for forbidden files/directories
+        FORBIDDEN_FOUND=false
+        
+        # Check for .vercel directory
+        if [ -d ".vercel" ]; then
+          echo "❌ BLOCKED: Found .vercel directory"
+          FORBIDDEN_FOUND=true
+        fi
+        
+        # Check for vercel.json
+        if [ -f "vercel.json" ]; then
+          echo "❌ BLOCKED: Found vercel.json file"
+          FORBIDDEN_FOUND=true
+        fi
+        
+        # Check for Vercel environment variables in any files
+        if grep -r "VERCEL_" . --exclude-dir=.git --exclude-dir=node_modules 2>/dev/null; then
+          echo "❌ BLOCKED: Found VERCEL_* environment variables"
+          FORBIDDEN_FOUND=true
+        fi
+        
+        # Check for vercel.app domains
+        if grep -r "\.vercel\.app" . --exclude-dir=.git --exclude-dir=node_modules 2>/dev/null; then
+          echo "❌ BLOCKED: Found vercel.app domain references"  
+          FORBIDDEN_FOUND=true
+        fi
+        
+        # Check for /api directory (common Vercel pattern)
+        if [ -d "api" ] && [ "$(find api -name "*.js" -o -name "*.ts" | wc -l)" -gt 0 ]; then
+          echo "⚠️  WARNING: Found /api directory with JS/TS files (Vercel pattern)"
+          echo "   If this is intentional, ensure it's documented as non-Vercel usage"
+        fi
+        
+        if [ "$FORBIDDEN_FOUND" = true ]; then
+          echo ""
+          echo "🚫 CI FAILED: This repository is Cloudflare Pages ONLY"
+          echo "   Remove Vercel artifacts and try again."
+          echo "   See SECURITY.md for deployment policy."
+          exit 1
+        fi
+        
+        echo "✅ No Vercel artifacts detected - CI check passed"
+        
+    - name: Validate deployment policy
+      run: |
+        echo "📋 Validating deployment policy compliance..."
+        
+        # Check that SECURITY.md exists and contains required content
+        if [ ! -f "SECURITY.md" ]; then
+          echo "❌ SECURITY.md missing"
+          exit 1
+        fi
+        
+        if ! grep -q "Cloudflare Pages" SECURITY.md; then
+          echo "❌ SECURITY.md missing Cloudflare Pages policy"
+          exit 1
+        fi
+        
+        echo "✅ Deployment policy validation passed"
