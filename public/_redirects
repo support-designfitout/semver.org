@@ -1,0 +1,11 @@
+# Cloudflare Pages _redirects file for semver.org
+
+# Redirect old paths to new ones if needed
+# /old-path /new-path 301
+
+# Handle health check endpoint
+/health /functions/health.pages.js 200
+
+# Default redirects - ensure trailing slashes for directories
+/spec /spec/ 301
+/lang /lang/ 301
