@@ -3,6 +3,7 @@ name: Nightly Sync of content
 on:
   schedule:
   - cron: '0 3 * * *' # run daily at 3am
+  workflow_dispatch:
 
 
 jobs:
