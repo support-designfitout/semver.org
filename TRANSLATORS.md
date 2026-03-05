@@ -28,6 +28,9 @@ This file contains the translation contributors who are willing to help translat
 - [@lxmarinkovic](https://github.com/lxmarinkovic)
 - [@rammba](https://github.com/rammba)
 
+## Dutch
+
+- [@niekvangalen](https://github.com/niekvangalen)
 ## Danish
 
 - [@symegac](https://github.com/symegac)
