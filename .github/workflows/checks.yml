@@ -1,6 +1,8 @@
 name: Check changes
 
-on: [pull_request]
+on:
+  pull_request:
+  workflow_dispatch:
 
 jobs:
   checks:
